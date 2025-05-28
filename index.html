@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ads Demo Site</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -11,27 +11,23 @@
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: 'Inter', sans-serif;
       background-color: #f9fafb;
       color: #111827;
       line-height: 1.6;
     }
-
     header {
       background-color: #1f2937;
       color: white;
       padding: 2rem;
       text-align: center;
     }
-
     main {
       padding: 2rem;
       max-width: 800px;
       margin: auto;
     }
-
     .ad-container {
       margin: 2rem 0;
       background: #e5e7eb;
@@ -39,7 +35,11 @@
       text-align: center;
       border: 2px dashed #9ca3af;
     }
-
+    .info-bar {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
     footer {
       text-align: center;
       padding: 2rem;
@@ -51,17 +51,19 @@
 <body>
   <header>
     <h1>Welcome to My Clean Google Ads Demo</h1>
-    <p>Demonstrating Ad Implementation on a website.</p>
+    <p>A simple site to demonstrate AdSense integration</p>
   </header>
 
   <main>
+    <div id="clock" class="info-bar">Loading time...</div>
+    <div id="visit-count" class="info-bar">Loading visits...</div>
+
     <section>
       <p>This is a basic yet clean and modern webpage designed to test and showcase Google Ads integration. You can write more content here, like articles, reviews, or tutorials to give your site real value.</p>
     </section>
 
     <div class="ad-container">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7210478255412119"
-     crossorigin="anonymous"></script>
+      <!-- Google AdSense code will go here -->
       <p>Ad slot (for demo)</p>
     </div>
 
@@ -71,7 +73,27 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 All rights reserved.</p>
+    <p>&copy; 2025 Tre Brumfield. All rights reserved.</p>
   </footer>
+
+  <!-- CLOCK SCRIPT -->
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById('clock').textContent = "Current time: " + timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+  <!-- VISIT COUNTER SCRIPT -->
+  <script>
+    fetch('https://api.countapi.xyz/hit/tbrumfield93-google-ads-demo/visits')
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('visit-count').textContent = "Visits: " + data.value;
+      });
+  </script>
 </body>
 </html>
