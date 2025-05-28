@@ -89,11 +89,25 @@
 
   <!-- VISIT COUNTER SCRIPT -->
   <script>
-    fetch('https://api.countapi.xyz/hit/tbrumfield93-google-ads-demo/visits')
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('visit-count').textContent = "Visits: " + data.value;
-      });
-  </script>
+  const visitDisplay = document.getElementById('visit-count');
+  const endpoint = 'https://api.countapi.xyz/hit/tbrumfield93-google-ads-demo/visits';
+
+  fetch(endpoint)
+    .then(res => {
+      if (!res.ok) {
+        // Try to create the counter first
+        return fetch('https://api.countapi.xyz/create?namespace=tbrumfield93-google-ads-demo&key=visits&value=0')
+          .then(() => fetch(endpoint)) // Retry increment after create
+          .then(res => res.json());
+      }
+      return res.json();
+    })
+    .then(data => {
+      visitDisplay.textContent = "Visits: " + data.value;
+    })
+    .catch(() => {
+      visitDisplay.textContent = "Visits: failed to load";
+    });
+</script>
 </body>
 </html>
