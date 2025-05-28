@@ -86,17 +86,5 @@
     setInterval(updateClock, 1000);
     updateClock();
   </script>
-
-  <!-- VISIT COUNTER SCRIPT -->
-  <script>
-  fetch('https://api.countapi.xyz/hit/tbrumfield93-google-ads-demo/visits')
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('visit-count').textContent = "Visits: " + data.value;
-    })
-    .catch(() => {
-      document.getElementById('visit-count').textContent = "Visits: failed to load";
-    });
-</script>
 </body>
 </html>
